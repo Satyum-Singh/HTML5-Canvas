@@ -58,11 +58,11 @@ function Circle(x, y, dx, dy, radius) {
 
 var circleArray = [];
 for (var i = 0; i < 100; i++) {
-  var x = Math.random() * window.innerWidth;
-  var y = Math.random() * window.innerHeight;
-  var dx = (Math.random() - 0.5) * 20;
-  var dy = (Math.random() - 0.5) * 20;
-  var circle = new Circle(x, y, dx, dy, 50);
+  var x = Math.random() * (innerWidth - 50 * 2) + 50;
+  var y = Math.random() * (innerHeight - 50 * 2) + 50;
+  var dx = Math.random() - 0.5 * 10;
+  var dy = Math.random() - 0.5 * 10;
+  circleArray.push(new Circle(x, y, dx, dy, 50));
 }
 
 function animate() {
