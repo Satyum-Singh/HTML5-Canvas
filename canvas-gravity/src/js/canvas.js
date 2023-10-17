@@ -24,9 +24,10 @@ const mouse = {
   y: innerHeight / 2,
 };
 
-const colors = ["#2185C5", "#7ECEFD", "#FFF6E5", "#FF7F66"];
+const colors = ["#2C3E50", "#E74C3C", "#ECF0F1", "#3498DB", "#2980B9"];
 
 var gravity = 1;
+var friction = 0.8;
 
 // Event Listeners
 window.addEventListener("mousemove", function (event) {
@@ -41,10 +42,15 @@ window.addEventListener("resize", function () {
   init();
 });
 
+window.addEventListener("click", function () {
+  init();
+});
+
 // Objects
-function Ball(x, y, dy, radius, color) {
+function Ball(x, y, dx, dy, radius, color) {
   this.x = x;
   this.y = y;
+  this.dx = dx;
   this.dy = dy;
   this.radius = radius;
   this.color = color;
@@ -59,12 +65,20 @@ function Ball(x, y, dy, radius, color) {
   };
 
   this.update = function () {
-    if (this.y + this.radius > canvas.height) {
-      this.dy = -this.dy * 0.8;
+    if (this.y + this.radius + this.dy > canvas.height) {
+      this.dy = -this.dy * friction;
     } else {
       this.dy += gravity;
+      console.log(this.dy);
     }
-    this.y = this.y + this.dy;
+    if (
+      this.x + this.radius + this.dx > canvas.width ||
+      this.x - this.radius <= this.radius
+    ) {
+      this.dx = -this.dx;
+    }
+    this.x += this.dx;
+    this.y += this.dy;
     this.draw();
   };
 }
@@ -73,10 +87,15 @@ function Ball(x, y, dy, radius, color) {
 var ball;
 var ballArray = [];
 function init() {
-  for (var i = 0; i < 200; i++) {
-    var x = randomIntFromRange(0, canvas.width);
-    var y = randomIntFromRange(0, canvas.height - this.radius);
-    ballArray.push(new Ball(x, y, 2, 30, "red"));
+  ballArray = [];
+  for (var i = 0; i < 400; i++) {
+    var radius = randomIntFromRange(8, 24);
+    var x = randomIntFromRange(radius, canvas.width - radius);
+    var y = randomIntFromRange(0, canvas.height - radius);
+    var dx = randomIntFromRange(-2, 2);
+    var dy = randomIntFromRange(-2, 2);
+    var color = randomColor(colors);
+    ballArray.push(new Ball(x, y, dx, dy, radius, color));
   }
 }
 
