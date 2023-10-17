@@ -4,14 +4,6 @@ const c = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-function randomIntFromRange(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-function randomColor(colors) {
-  return colors[Math.floor(Math.random() * colors.length)];
-}
-
 function distance(x1, y1, x2, y2) {
   const xDist = x2 - x1;
   const yDist = y2 - y1;
@@ -27,17 +19,25 @@ const mouse = {
 const colors = ["#2C3E50", "#E74C3C", "#ECF0F1", "#3498DB", "#2980B9"];
 
 // Event Listeners
-addEventListener("mousemove", (event) => {
+addEventListener("mousemove", function (event) {
   mouse.x = event.clientX;
   mouse.y = event.clientY;
 });
 
-addEventListener("resize", () => {
+addEventListener("resize", function () {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
 
   init();
 });
+
+function randomIntFromRange(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
+function randomColor(colors) {
+  return colors[Math.floor(Math.random() * colors.length)];
+}
 
 // Objects
 function Circle(x, y, radius, color) {
