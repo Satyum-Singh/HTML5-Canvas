@@ -26,6 +26,8 @@ const mouse = {
 
 const colors = ["#2185C5", "#7ECEFD", "#FFF6E5", "#FF7F66"];
 
+var gravity = 1;
+
 // Event Listeners
 window.addEventListener("mousemove", function (event) {
   mouse.x = event.clientX;
@@ -57,9 +59,9 @@ function Ball(x, y, dy, radius, color) {
 
   this.update = function () {
     if (this.y + this.radius > canvas.height) {
-      this.dy = -this.dy;
+      this.dy = -this.dy * 0.8;
     } else {
-      this.dy += 1;
+      this.dy += gravity;
     }
     this.y = this.y + this.dy;
     this.draw();
@@ -68,8 +70,13 @@ function Ball(x, y, dy, radius, color) {
 
 // Implementation
 var ball;
+var ballArray = [];
 function init() {
-  ball = new Ball(canvas.width / 2, canvas.height / 2, 10, 30, "red");
+  for (var i = 0; i < 500; i++) {
+    var x = randomIntFromRange(0, canvas.width);
+    var x = randomIntFromRange(0, canvas.height);
+    ballArray.push(new Ball(x, y, 2, 30, "red"));
+  }
   console.log(ball);
 }
 
@@ -77,7 +84,9 @@ function init() {
 function animate() {
   requestAnimationFrame(animate);
   c.clearRect(0, 0, canvas.width, canvas.height);
-  ball.update();
+  for (var i = 0; i < ballArray.length; i++) {
+    ballArray[i].update();
+  }
 }
 
 init();
