@@ -54,6 +54,7 @@ function Ball(x, y, dy, radius, color) {
     c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
     c.fillStyle = this.color;
     c.fill();
+    c.stroke();
     c.closePath();
   };
 
@@ -72,12 +73,11 @@ function Ball(x, y, dy, radius, color) {
 var ball;
 var ballArray = [];
 function init() {
-  for (var i = 0; i < 500; i++) {
+  for (var i = 0; i < 200; i++) {
     var x = randomIntFromRange(0, canvas.width);
-    var x = randomIntFromRange(0, canvas.height);
+    var y = randomIntFromRange(0, canvas.height - this.radius);
     ballArray.push(new Ball(x, y, 2, 30, "red"));
   }
-  console.log(ball);
 }
 
 // Animation Loop
