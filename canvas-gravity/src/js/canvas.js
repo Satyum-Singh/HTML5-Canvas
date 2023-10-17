@@ -27,7 +27,7 @@ const mouse = {
 const colors = ["#2C3E50", "#E74C3C", "#ECF0F1", "#3498DB", "#2980B9"];
 
 var gravity = 1;
-var friction = 0.8;
+var friction = 0.99;
 
 // Event Listeners
 window.addEventListener("mousemove", function (event) {
