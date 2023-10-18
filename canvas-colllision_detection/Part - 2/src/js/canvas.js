@@ -24,7 +24,7 @@ function distance(x1, y1, x2, y2) {
   return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2))
 }
 
-const colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66']
+let colors = ["#2C3E50", "#E74C3C", "#ECF790", "#3498DB", "#2980B9"]
 
 // Event Listeners
 window.addEventListener('mousemove', (event) => {
@@ -116,10 +116,16 @@ function Particle(x, y, radius, color) {
     this.radius = radius;
     this.color = color;
     this.mass=1;
+    this.opacity=0;
 
     this.draw = () => {
       c.beginPath()
       c.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
+      c.save()
+      c.globalAlpha = this.opacity;
+      c.fillStyle = this.color
+      c.fill()
+      c.restore()      
       c.strokeStyle = this.color
       c.stroke()
       c.closePath()
@@ -141,6 +147,14 @@ function Particle(x, y, radius, color) {
     else if(this.y-radius<=0 || this.y+radius>=canvas.height){  
       this.velocity.y=-this.velocity.y;
     }
+
+    if(distance(mouse.x,mouse.y,this.x,this.y)<120 && this.opacity<0.4){
+      this.opacity+=0.04;
+    }
+    else if(this.opacity>0){
+      this.opacity-=0.04;
+      this.opacity=Math.max(0,this.opacity);
+    }
     
     this.x += this.velocity.x;
     this.y += this.velocity.y;
@@ -154,7 +168,7 @@ let particles;
 function init() {
   particles = []
 
-  for (let i = 0; i < 200; i++) {
+  for (let i = 0; i < 400; i++) {
     const radius = 15;
     let x = randomIntFromRange(radius, canvas.width - radius);
     let y = randomIntFromRange(radius, canvas.height - radius);
