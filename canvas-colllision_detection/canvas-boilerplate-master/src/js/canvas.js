@@ -4,27 +4,20 @@ const c = canvas.getContext("2d");
 canvas.width = innerWidth;
 canvas.height = innerHeight;
 
-function distance(x1, y1, x2, y2) {
-  const xDist = x2 - x1;
-  const yDist = y2 - y1;
-
-  return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
-}
-
-const mouse = {
-  x: innerWidth / 2,
-  y: innerHeight / 2,
+let mouse = {
+  x: 10,
+  y: 10,
 };
 
 const colors = ["#2C3E50", "#E74C3C", "#ECF0F1", "#3498DB", "#2980B9"];
 
 // Event Listeners
-addEventListener("mousemove", function (event) {
+window.addEventListener("mousemove", function (event) {
   mouse.x = event.clientX;
   mouse.y = event.clientY;
 });
 
-addEventListener("resize", function () {
+window.addEventListener("resize", function () {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
 
@@ -37,6 +30,13 @@ function randomIntFromRange(min, max) {
 
 function randomColor(colors) {
   return colors[Math.floor(Math.random() * colors.length)];
+}
+
+function distance(x1, y1, x2, y2) {
+  let xDist = x2 - x1;
+  let yDist = y2 - y1;
+
+  return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2));
 }
 
 // Objects
@@ -64,7 +64,7 @@ let circle1;
 let circle2;
 function init() {
   circle1 = new Circle(300, 300, 100, "black");
-  circle2 = new Circle(undefined, undefined, 30, "#ff5679");
+  circle2 = new Circle(10, 10, 30, "#ff5679");
 }
 
 // Animation Loop
@@ -76,6 +76,15 @@ function animate() {
   circle2.x = mouse.x;
   circle2.y = mouse.y;
   circle2.update();
+
+  if (
+    distance(circle1.x, circle1.y, circle2.x, circle2.y) <
+    circle1.radius + circle2.radius
+  ) {
+    circle1.color = "red";
+  } else {
+    circle1.color = "black";
+  }
 }
 
 init();
