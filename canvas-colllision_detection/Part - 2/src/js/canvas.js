@@ -110,8 +110,8 @@ function Particle(x, y, radius, color) {
     this.x = x;
     this.y = y;
     this.velocity = {
-      x:(Math.random()-0.5)*8,
-      y:(Math.random()-0.5)*8,
+      x:(Math.random()-0.5)*6,
+      y:(Math.random()-0.5)*6,
     }
     this.radius = radius;
     this.color = color;
