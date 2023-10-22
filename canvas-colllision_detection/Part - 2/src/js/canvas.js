@@ -24,7 +24,7 @@ function distance(x1, y1, x2, y2) {
   return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2))
 }
 
-let colors = ["#2C3E50", "#E74C3C", "#ECF790", "#3498DB", "#2980B9"]
+let colors = ["#2C3E50", "#E74C3C", "#3498DB", "#2980B9", "#8E44AD", "#F39C12", "#D35400", "#1ABC9C", "#27AE60"  ]
 
 // Event Listeners
 window.addEventListener('mousemove', (event) => {
@@ -110,8 +110,8 @@ function Particle(x, y, radius, color) {
     this.x = x;
     this.y = y;
     this.velocity = {
-      x:(Math.random()-0.5)*5,
-      y:(Math.random()-0.5)*5,
+      x:(Math.random()-0.5)*8,
+      y:(Math.random()-0.5)*8,
     }
     this.radius = radius;
     this.color = color;
