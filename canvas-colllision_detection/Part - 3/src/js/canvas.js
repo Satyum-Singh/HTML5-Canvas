@@ -72,14 +72,22 @@ function init() {
 }
 
 // Animation Loop
+
+const blueRecPosition = canvas.width/2-50;
+
 function animate() {
   requestAnimationFrame(animate)
-  c.clearRect(0, 0, canvas.width, canvas.height)
+  c.fillStyle="#1a1a23"
+  c.fillRect(0, 0, canvas.width, canvas.height)
 
-  c.fillText('HTML CANVAS BOILERPLATE', mouse.x, mouse.y)
-  // objects.forEach(object => {
-  //  object.update()
-  // })
+  if(mouse.x + 100 >= blueRecPosition && mouse.x<= blueRecPosition+100 && mouse.y + 100 >= blueRecPosition && mouse.y<= blueRecPosition+100){
+    console.log("colliding");
+  }
+  c.fillStyle="#e86262"
+  c.fillRect(mouse.x, mouse.y, 100, 100)
+
+  c.fillStyle="#92abea"
+  c.fillRect(canvas.width/2-50, canvas.height/2-50, 100, 100)
 }
 
 init()
