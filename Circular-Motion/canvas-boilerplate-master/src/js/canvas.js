@@ -24,7 +24,7 @@ function distance(x1, y1, x2, y2) {
   return Math.sqrt(Math.pow(xDist, 2) + Math.pow(yDist, 2))
 }
 
-const colors = ['#2185C5', '#7ECEFD', '#FFF6E5', '#FF7F66']
+const colors = ["#2C3E50", "#E74C3C", "#ECF0F1", "#3498DB", "#2980B9"]
 
 // Event Listeners
 addEventListener('mousemove', (event) => {
@@ -46,11 +46,11 @@ function Particle(x, y, radius, color) {
     this.radius = radius
     this.color = color
     this.radians = Math.random()*Math.PI*2;
-    this.velocity = 0.04;
+    this.velocity = 0.07;
     this.distanceFromCenter = randomIntFromRange(50,120);
 
   this.update = () => {
-    var lastPoint = {x: this.x, y: this.y};
+    const lastPoint = {x: this.x, y: this.y};
 
     //Move points
     this.radians += this.velocity;
@@ -58,7 +58,7 @@ function Particle(x, y, radius, color) {
     // Circular Motion
     this.x = x + Math.cos(this.radians)*this.distanceFromCenter;
     this.y = y + Math.sin(this.radians)*this.distanceFromCenter;
-    this.draw()
+    this.draw(lastPoint);
   }
 
   this.draw = lastPoint => {
@@ -82,7 +82,8 @@ function init() {
   particles = [];
 
   for (let i = 0; i < 50; i++) {
-    particles.push(new Particle(canvas.width / 2, canvas.height / 2, 5, 'blue'))
+    const radius = (Math.random()*2)+1;
+    particles.push(new Particle(canvas.width / 2, canvas.height / 2, radius, 'blue'))
   }
   console.log(particles)
 }
