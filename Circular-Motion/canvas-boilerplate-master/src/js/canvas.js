@@ -46,7 +46,7 @@ function Particle(x, y, radius, color) {
     this.radius = radius
     this.color = color
     this.radians = Math.random()*Math.PI*2;
-    this.velocity = 0.07;
+    this.velocity = 0.05;
     this.distanceFromCenter = randomIntFromRange(50,120);
     this.lastMouse = {x:x,y:y};
 
@@ -57,7 +57,8 @@ function Particle(x, y, radius, color) {
     this.radians += this.velocity;
 
     // Drag Effect
-    this.lastMouse += (mouse.x - this.lastMouse.x) * 0.07; 
+    this.lastMouse.x += (mouse.x - this.lastMouse.x) * 0.05; 
+    this.lastMouse.y += (mouse.y - this.lastMouse.y) * 0.05; 
 
 
     // Circular Motion
