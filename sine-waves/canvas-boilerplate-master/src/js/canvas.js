@@ -1,6 +1,18 @@
+import * as dat from 'dat.gui'
+
+const dat = new dat.GUI()
+
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
-canvas.width = innerWidth
-canvas.height = innerHeight
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
 
+c.beginPath();
+
+c.moveTo(0,canvas.height/2);
+
+for(let i = 0; i < canvas.width; i++){
+  c.lineTo(i, canvas.height/2 + Math.sin(i*0.01)*100);
+}
+c.stroke();
